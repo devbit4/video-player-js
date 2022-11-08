@@ -2,6 +2,11 @@ doctype html
 html(lang="ko")
     head
         title #{pageTitle} | Wetube
+        link(rel="stylesheet" href="https://unpkg.com/mvp.css")
     body
+        header
+            h1=pageTitle
+        main
         block content
-    include partials/footer.pug
+            h2 Welcome here you will see the trending videos
+    include partials/footer
