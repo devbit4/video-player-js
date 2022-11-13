@@ -14,6 +14,6 @@ app.use(logger);
 app.use(express.urlencoded({ extended: true }));
 app.use('/', globalRouter);
 app.use('/user', userRouter);
-app.use('/video', videoRouter);
+app.use('/videos', videoRouter);
 
 export default app;
