@@ -7,7 +7,25 @@ export const getJoin = (req, res, next) => {
 };
 
 export const postJoin = async (req, res, next) => {
-  const { name, username, email, password, location } = req.body;
+  const { name, username, email, password, password2, location } = req.body;
+  const pageTitle = 'Join';
+  console.log(name, username, email, password, password2, location);
+  //확인비밀번호가 다를 때
+  if (password !== password2) {
+    return res.status(400).render('join', {
+      pageTitle,
+      errorMessage: 'Password confirmation does not match.',
+    });
+  }
+  //이미 존재하는 username 또는 email 일때
+  const exists = await User.exists({ $or: [{ username }, { email }] });
+  if (exists) {
+    return res.status(400).render('join', {
+      pageTitle,
+      errorMessage: 'This username/email is already taken.',
+    });
+  }
+
   await User.create({
     name,
     username,
