@@ -1,0 +1,11 @@
+h1="TXT2HTML"
+
+form(method="POST", enctype="multipart/form-data" action="/read")
+    label(for="txt")
+    input(type="file", accept="txt/*", required, id="txt", name="txt")
+    input(type="submit" value="Convert")
+
+ul 
+    each item in list 
+        li
+            a(href=`/read/${item}`)=item
