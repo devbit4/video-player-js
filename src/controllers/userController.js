@@ -75,7 +75,35 @@ export const postLogin = async (req, res) => {
   return res.redirect("/");
 };
 
-export const logout = (req, res) => res.send("logout");
-export const edit = (req, res) => res.send("edit user");
+export const logout = (req, res) => {
+  req.session.destroy();
+  return res.redirect("/");
+};
+
+export const getEdit = (req, res) => {
+  return res.render("edit-profile", { pageTitle: "Edit Profile" });
+};
+
+export const postEdit = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { name, email, username, location },
+  } = req;
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      name,
+      email,
+      username,
+      location,
+    },
+    { new: true }
+  );
+  req.session.user = updatedUser;
+  return res.redirect("/user/edit");
+};
+
 export const remove = (req, res) => res.send("remove user");
 export const see = (req, res) => res.send("see user");
