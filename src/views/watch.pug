@@ -28,12 +28,15 @@ block content
                  each comment in video.comments.reverse()
                     li.video__comment(data-id=comment.id)
                         span #{comment.text}
-                        span ❌
+                        
+                        if loggedIn && (loggedInUser._id === String(comment.owner))
+                            span.video__comment-delete ❌
     //- div
     //-     p=video.description
     //-     small=video.createdAt
-        
+    
     a(href=`${video.id}/edit`) Edit Video &rarr;
+       
     //- br
     //- a(href=`${video.id}/delete`) Delete Video &rarr;
     block scripts

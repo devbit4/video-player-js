@@ -13,11 +13,12 @@ const videoSchema = new mongoose.Schema({
   comments: [
     { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Comment" },
   ],
+  // owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
 });
 
 videoSchema.static("formatHashtags", function (hashtags) {
   return hashtags
-    .split(",")
+    ?.split(",")
     .map((word) => (word.startsWith("#") ? word : `#${word}`));
 });
 
