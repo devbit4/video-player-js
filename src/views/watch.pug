@@ -1,7 +1,7 @@
 extends base
 
 block content
-    div#videoContainer
+    div#videoContainer(data-id=video._id)
         video(src="/" + video.fileUrl)
         div#videoControls
         div
@@ -15,13 +15,28 @@ block content
             div
                 input(type="range",step="1", value="0", min="0")#timeline    
             div
-                button#fullScreen Enter Full Screen    
+                button#fullScreen Enter Full Screen   
+
+            if loggedIn
+            div.video__add-comments
+            form.video__comment-form#commentForm
+                textarea(cols="30", rows="10", placeholder="Write a nice commment...")
+                button Add Comment   
+
+            div.video__comments
+                ul
+                 each comment in video.comments.reverse()
+                    li.video__comment(data-id=comment.id)
+                        span #{comment.text}
+                        span ❌
     //- div
     //-     p=video.description
     //-     small=video.createdAt
         
-    //- a(href=`${video.id}/edit`) Edit Video &rarr;
+    a(href=`${video.id}/edit`) Edit Video &rarr;
     //- br
     //- a(href=`${video.id}/delete`) Delete Video &rarr;
     block scripts
     script(src="/static/js/videoPlayer.js") 
+    if loggedIn
+        script(src="/static/js/commentSection.js") 
