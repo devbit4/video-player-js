@@ -23,7 +23,10 @@ app.use(
     secret: "Hello!",
     resave: true,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: "mongodb://127.0.0.1:27017/player" }),
+    store: MongoStore.create({
+      mongoUrl:
+        "mongodb+srv://dev:PZg9GcAnB9fkee!@cluster0.ylvqlcd.mongodb.net/?retryWrites=true&w=majority",
+    }),
   })
 );
 
