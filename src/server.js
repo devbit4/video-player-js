@@ -24,8 +24,7 @@ app.use(
     resave: true,
     saveUninitialized: true,
     store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://dev:PZg9GcAnB9fkee!@cluster0.ylvqlcd.mongodb.net/?retryWrites=true&w=majority",
+      mongoUrl: process.env.DB_URL,
     }),
   })
 );
